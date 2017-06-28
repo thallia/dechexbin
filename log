@@ -1,0 +1,57 @@
+Project log for a forth program that takes a binary number as input
+and returns a decimal number as output; eventually vice versa.
+
+Forth is unable to take binary as input, currently only HEX, DEC, and OCT.
+That said, I'll have to find a way to get the program to accept and interpret those numbers.
+
+Aha! I was looking through the compiler chapter of Starting Forth, and you *can* input binary.
+
+2 BASE !
+
+then DECIMAL changes it back.
+
+
+For stopping a word from executing to provide input I should play with ACCEPT:
+
+"The word ACCEPT stops execution of the task and waits for input from your keyboard. It expects a given number of keystrokes or a carriage return, whichever comes first."
+
+Should see if it could input a word to determine whether I'm converting between decimal, hex, or binary.
+
+I'm going to use KEY and B, H, and D. Depending on the ASCII value on the stack, it'll execute a certain word.
+
+D = 68
+d = 100
+H = 72
+h = 104
+B = 66
+b = 98
+
+6-27-17
+I learned that you cannot run a forth program without defining all the words you've created yet XD That's a good thing to remember. You also have to have the words defined in the file before actually executing them later in the file, which I didn't know. I thought it compiled all the definitions first before sorting them out and then ran the program. Guess I was wrong. TIL!
+Now that I think about it it's kind of dumb that I assumed that. :P
+
+Checking the workings of D_E_C - h, it works.
+
+H_E_X - b = not working. It's outputting hex's stuff, instead of binary's. hmm. the ASCII value inputs are working fine on the keyboard. Lets check the actual function.
+
+AH! My if-then functions are wonky. I was having it always execute hexyshmexy. whoops. had to fix all my if thens after that. *dork*
+
+Lets try this again.
+
+Sweet, D_E_C - h and D_E_C - b both work.
+
+Let's try H_E_X now.
+
+H_E_X - d = works! :D
+
+H_E_X - b = works yas
+
+And finally B_I_N.
+
+B_I_N - h = works
+
+B_I_N - d = woohoo! It works! :D
+
+Now to get a "back" option in there. Not sure how I'm going to do that yet.
+
+Well I made it, but now I'm running into the issue of the program trying to compile an uncompiled word because it hasn't reached it in the file yet. Fun. Gonna go eat and come back to this problem later. 
